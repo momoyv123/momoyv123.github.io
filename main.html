@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我们的纪念空间 | 测试页</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.92);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            margin: 20px 0;
+        }
+
+        h1 {
+            color: #e84393;
+            margin-bottom: 20px;
+            font-size: 2.8em;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: #636e72;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .heart {
+            color: #ff6b8b;
+            font-size: 2em;
+            display: inline-block;
+            margin: 20px 0;
+            animation: heartbeat 1.2s infinite ease-in-out;
+        }
+
+        /* 心跳动画 - 简单的动态效果 */
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* 动态背景装饰点 */
+        .bg-dots {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(232, 67, 147, 0.15);
+            animation: float 15s infinite linear;
+        }
+
+        /* 漂浮动画 - 动态背景效果 */
+        @keyframes float {
+            from { transform: translateY(0) rotate(0deg); }
+            to { transform: translateY(-1000px) rotate(720deg); }
+        }
+
+        .instructions {
+            background-color: #f8f9fa;
+            border-left: 4px solid #74b9ff;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: left;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .instructions h3 {
+            color: #0984e3;
+            margin-bottom: 10px;
+        }
+
+        .instructions code {
+            background-color: #dfe6e9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        footer {
+            margin-top: 30px;
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 动态背景点 -->
+    <div class="bg-dots" id="bgDots"></div>
+
+    <!-- 主内容容器 -->
+    <div class="container">
+        <h1>欢迎来到我们的空间 ✨</h1>
+        <p class="subtitle">
+            这是一个简单的测试页面，用于验证 GitHub Pages 是否工作正常。<br>
+            页面上包含一个动态跳动的心和一个简单的漂浮粒子背景。
+        </p>
+
+        <div class="heart">❤️</div>
+
+        <p style="margin: 25px 0; font-size: 1.1em;">
+            恭喜你！如果你能看到这个页面，说明你已经成功托管了一个网页。<br>
+            接下来，你可以尽情修改这个文件，把它变成你们独一无二的纪念站。
+        </p>
+
+        <!-- 操作说明区块 -->
+        <div class="instructions">
+            <h3>如何修改这个页面？</h3>
+            <p>1. 用文本编辑器（如VSCode、记事本）打开 <code>index.html</code> 文件。</p>
+            <p>2. 找到 <code>&lt;h1&gt;</code> 标签内的文字，替换成你们想说的话。</p>
+            <p>3. 保存文件，重新上传到GitHub仓库，刷新浏览器即可看到变化。</p>
+            <p><strong>提示：</strong> 修改 <code>&lt;style&gt;</code> 标签里的CSS代码可以改变颜色、字体等样式。</p>
+        </div>
+
+        <footer>
+            <p>页面自动生成于 <span id="currentDate"></span> | 由GitHub Pages提供支持</p>
+        </footer>
+    </div>
+
+    <script>
+        // 动态生成背景点
+        function createDots() {
+            const dotsContainer = document.getElementById('bgDots');
+            for (let i = 0; i < 50; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                const size = Math.random() * 60 + 10; // 10px 到 70px
+                dot.style.width = size + 'px';
+                dot.style.height = size + 'px';
+                dot.style.left = Math.random() * 100 + 'vw';
+                dot.style.animationDuration = (Math.random() * 20 + 10) + 's';
+                dot.style.animationDelay = Math.random() * 5 + 's';
+                dot.style.opacity = Math.random() * 0.4 + 0.1;
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        // 显示当前日期
+        function displayDate() {
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('zh-CN', options);
+        }
+
+        // 页面加载完成后执行
+        window.onload = function() {
+            createDots();
+            displayDate();
+        };
+    </script>
+</body>
+</html>
